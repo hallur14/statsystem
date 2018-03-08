@@ -6,18 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using SimpleStatsApi.Services;
 
 using SimpleStatsApi.Models.DTOModels;
-using SimpleStatsApi.Utilites.Exceptions;
+using SimpleStatsApi.Models.ViewModels;
+using SimpleStatsApi.Utilities.Exceptions;
 
 namespace Api.Controllers
 {
-    //[Route("api/[controller]")]
     public class StatsController : Controller
     {
-        private readonly IUsersService _usersService;
+        private readonly IUserService _userService;
 
-        public StatsController(IUsersService usersService)
+        public StatsController(IUserService userService)
         {
-            _usersService = usersService;
+            _userService = userService;
         }
 
         // GET api/users
@@ -27,7 +27,7 @@ namespace Api.Controllers
         {
             IEnumerable<UserDTO> users;
 
-            users = _usersService.GetAllUsers();
+            users = _userService.GetAllUsers();
             
             return Ok(users);
         }
@@ -41,7 +41,7 @@ namespace Api.Controllers
 
             try
             {
-                user = _usersService.GetUserById(id);
+                user = _userService.GetUserById(id);
             }
             catch(UserNotFoundException error)
             {
@@ -49,6 +49,51 @@ namespace Api.Controllers
             }
             
             return Ok(user);
+        }
+
+        // Post api/users
+        [HttpPost]
+        [Route("api/users", Name = "AddUser")]
+        public IActionResult AddUser([FromBody]UserViewModel newUser)
+        {
+            if(newUser == null)
+            {
+                return BadRequest();
+            }
+
+            if(!ModelState.IsValid)
+            {
+                return StatusCode(412);
+            }
+
+            try
+            {
+                var user = _userService.AddNewUser(newUser);
+
+                return Ok(user);
+            }
+            catch(UserNotFoundException error)
+            {
+                return StatusCode(503, error.Message);
+            }        
+        }
+
+        // api/user/{id}
+        [HttpDelete]
+        [Route("api/users/{id:int}", Name = "DeleteUser")]
+        public IActionResult deleteUser(int id)
+        {
+            try
+            {
+                _userService.deleteUser(id);
+
+                return NoContent();
+            }
+            catch(UserNotFoundException error)
+            {
+                return StatusCode(404, error.Message);
+            }
+
         }
     }
 }

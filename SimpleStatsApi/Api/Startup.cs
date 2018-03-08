@@ -27,8 +27,8 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddTransient<IUsersRepository, UsersRepository>();
-            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IStatSystemRepository, StatSystemRepository>();
+            services.AddTransient<IUserService, UserService>();
             services.AddDbContext<AppDataContext> (options => options.UseSqlite("Data Source=../Repositories/SimpleStatsApi.db", b => b.MigrationsAssembly("Api")));
         }
 

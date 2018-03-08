@@ -1,6 +1,6 @@
 using System;
 
-namespace SimpleStatsApi.Utilites.Exceptions
+namespace SimpleStatsApi.Utilities.Exceptions
 {
     public class  UserNotFoundException: Exception
     {

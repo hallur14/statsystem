@@ -1,14 +1,16 @@
 using System.Collections.Generic;
+
 using SimpleStatsApi.Models.DTOModels;
+using SimpleStatsApi.Models.ViewModels;
 using SimpleStatsApi.Repositories;
 
 namespace SimpleStatsApi.Services
 {
-    public class UsersService : IUsersService
+    public class UserService : IUserService
     {
-        private readonly IUsersRepository _repo;
+        private readonly IStatSystemRepository _repo;
 
-        public UsersService(IUsersRepository repo)
+        public UserService(IStatSystemRepository repo)
         {
             _repo = repo;
         }
@@ -25,6 +27,18 @@ namespace SimpleStatsApi.Services
             var user = _repo.GetUserById(id);
 
             return user;
+        }
+
+        public UserDTO AddNewUser(UserViewModel newUser)
+        {
+            var user = _repo.AddNewUser(newUser);
+
+            return user;
+        }
+
+        public void deleteUser(int id)
+        {
+            _repo.deleteUser(id);
         }
     }
 }

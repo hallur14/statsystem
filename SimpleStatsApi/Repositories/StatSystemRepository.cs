@@ -59,7 +59,8 @@ namespace SimpleStatsApi.Repositories
                 firstName = newUser.firstName,
                 lastName = newUser.lastName,
                 email = newUser.email,
-                isDeleted = 0
+                isDeleted = 0,
+                password = newUser.password
             };
 
             try

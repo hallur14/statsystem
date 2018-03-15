@@ -14,8 +14,11 @@ namespace Api.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    email = table.Column<string>(nullable: true),
                     firstName = table.Column<string>(nullable: true),
-                    lastName = table.Column<string>(nullable: true)
+                    isDeleted = table.Column<int>(nullable: false),
+                    lastName = table.Column<string>(nullable: true),
+                    password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

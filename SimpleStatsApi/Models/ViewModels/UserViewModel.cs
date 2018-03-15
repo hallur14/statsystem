@@ -13,5 +13,7 @@ namespace SimpleStatsApi.Models.ViewModels
         
         [Required]
         public string email { get; set; }
+        [Required]
+        public string password { get; set; }
     }
 }

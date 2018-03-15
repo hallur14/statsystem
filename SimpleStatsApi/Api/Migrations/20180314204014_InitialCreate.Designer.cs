@@ -10,7 +10,7 @@ using System;
 namespace Api.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20180305012717_InitialCreate")]
+    [Migration("20180314204014_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,9 +24,15 @@ namespace Api.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("email");
+
                     b.Property<string>("firstName");
 
+                    b.Property<int>("isDeleted");
+
                     b.Property<string>("lastName");
+
+                    b.Property<string>("password");
 
                     b.HasKey("id");
 

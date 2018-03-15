@@ -7,6 +7,7 @@ namespace SimpleStatsApi.Models.EntityModels
         public string lastName { get; set; }
         public int isDeleted { get; set; }
         public string email { get; set; }
+        public string password { get; set; }
     
     }
 }

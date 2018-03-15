@@ -23,9 +23,15 @@ namespace Api.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("email");
+
                     b.Property<string>("firstName");
 
+                    b.Property<int>("isDeleted");
+
                     b.Property<string>("lastName");
+
+                    b.Property<string>("password");
 
                     b.HasKey("id");
 
